@@ -28,9 +28,9 @@ export default function Home() {
 
   return (
     <main className='min-h-screen p-4 flex flex-col items-center bg-gray-100'>
-      <h1 className='text-2xl font-bold mb-4'>📝 To Do List</h1>
+      <h1 className='text-xl sm:text-2xl font-bold mb-4'>📝 To Do List</h1>
 
-      <div className='flex gap-2 mb-4'>
+      <div className='flex flex-col sm:flex-row gap-2 mb-4 w-full max-w-md'>
         <input
           type='text'
           value={newTodo}
@@ -50,9 +50,9 @@ export default function Home() {
         {todos.map((todo, index) => (
           <li
             key={index}
-            className='flex justify-between items-center bg-white p-2 mb-2 rounded shadow'
+            className='flex items-center justify-between gap-2 bg-white p-2 mb-2 rounded shadow'
           >
-            <div className='flex items-center gap-2'>
+            <div className='flex items-center gap-2 flex-1 overflow-hidden'>
               <input
                 type='checkbox'
                 checked={todo.completed}
@@ -60,7 +60,7 @@ export default function Home() {
                 className='accent-green-500 w-4 h-4'
               />
               <span
-                className={`text-black ${
+                className={`text-black truncate ${
                   todo.completed ? 'line-through text-gray-400' : ''
                 }`}
               >
@@ -69,7 +69,7 @@ export default function Home() {
             </div>
             <button
               onClick={() => removeTodo(index)}
-              className='text-red-500 hover:text-red-700 font-bold text-lg cursor-pointer'
+              className='text-red-500 hover:text-red-700 font-bold text-xl shrink-0 cursor-pointer'
               aria-label='Delete'
             >
               ×
