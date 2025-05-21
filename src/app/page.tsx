@@ -3,22 +3,21 @@
 import { useState } from 'react';
 
 export default function Home() {
-  const [todos, setTodos] = useState<{ text: string; completed: boolean }[]>([
-    { text: 'Buy milk', completed: false },
-    { text: 'Build app', completed: false },
-  ]);
-
+  const [todos, setTodos] = useState<{ text: string; completed: boolean }[]>(
+    []
+  );
   const [newTodo, setNewTodo] = useState('');
 
   const addTodo = (text: string) => {
+    if (text.trim() === '') return;
     setTodos([...todos, { text, completed: false }]);
     setNewTodo('');
   };
 
   const removeTodo = (index: number) => {
-    const newTodos = todos.filter((_, i) => i !== index);
-    setTodos(newTodos);
+    setTodos((prev) => prev.filter((_, i) => i !== index));
   };
+
   const toggleCompleted = (index: number) => {
     setTodos((prev) =>
       prev.map((todo, i) =>
@@ -36,7 +35,7 @@ export default function Home() {
           type='text'
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
-          className='w-md border px-2 py-1  rounded'
+          className='w-md border px-2 py-1 rounded'
           placeholder='Enter a task'
         />
         <button
@@ -70,7 +69,7 @@ export default function Home() {
             </div>
             <button
               onClick={() => removeTodo(index)}
-              className='text-red-500 hover:text-red-700 font-bold text-lg'
+              className='text-red-500 hover:text-red-700 font-bold text-lg cursor-pointer'
               aria-label='Delete'
             >
               ×
