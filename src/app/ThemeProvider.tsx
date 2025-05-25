@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, ReactNode } from 'react';
+import { SunIcon, MoonIcon } from '@heroicons/react/24/solid';
 
 export default function ThemeProvider({ children }: { children: ReactNode }) {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -31,9 +32,14 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
     <>
       <button
         onClick={toggleTheme}
-        className='fixed top-4 right-4 z-50 px-4 py-2 rounded bg-gray-800 text-white cursor-pointer hover:bg-gray-700 dark:bg-blue-500 dark:text-white dark:hover:bg-blue-500'
+        aria-label='Toggle theme'
+        className='fixed top-4 right-4 z-50 p-2 rounded cursor-pointer'
       >
-        {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+        {isDarkMode ? (
+          <SunIcon className='w-6 h-6 text-yellow-400 hover:text-yellow-300 transition-colors' />
+        ) : (
+          <MoonIcon className='w-6 h-6 text-gray-800 hover:text-gray-600 transition-colors' />
+        )}
       </button>
       {children}
     </>
