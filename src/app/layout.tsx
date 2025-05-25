@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import ThemeProvider from './ThemeProvider';
 
 export const metadata: Metadata = {
   title: 'To Do List',
@@ -8,12 +9,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang='en'>
-      <body className='antialiased bg-gray-100 text-gray-900'>{children}</body>
+      <body className='antialiased transition-colors duration-300'>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

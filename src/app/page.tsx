@@ -27,7 +27,7 @@ export default function Home() {
   };
 
   return (
-    <main className='min-h-screen p-4 flex flex-col items-center bg-gray-100'>
+    <main className='min-h-screen p-4 flex flex-col items-center'>
       <h1 className='text-xl sm:text-2xl font-bold mb-4'>📝 To Do List</h1>
 
       <div className='flex flex-col sm:flex-row gap-2 mb-4 w-full max-w-md'>
@@ -50,18 +50,23 @@ export default function Home() {
         {todos.map((todo, index) => (
           <li
             key={index}
-            className='flex items-center justify-between gap-2 bg-white p-2 mb-2 rounded shadow'
+            className='flex items-center justify-between gap-2 
+             bg-white text-black 
+             dark:bg-gray-600 dark:text-white 
+             p-2 mb-2 rounded shadow transition-colors duration-300'
           >
             <div className='flex items-center gap-2 flex-1 overflow-hidden'>
               <input
                 type='checkbox'
                 checked={todo.completed}
                 onChange={() => toggleCompleted(index)}
-                className='accent-green-500 w-4 h-4'
+                className='accent-green-500 w-4 h-4 '
               />
               <span
-                className={`text-black truncate ${
-                  todo.completed ? 'line-through text-gray-400' : ''
+                className={`text-black dark:text-white truncate ${
+                  todo.completed
+                    ? 'line-through text-gray-400 dark:text-gray-500'
+                    : ''
                 }`}
               >
                 {todo.text}
