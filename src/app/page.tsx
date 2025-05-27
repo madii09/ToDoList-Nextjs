@@ -3,14 +3,15 @@
 import { useState } from 'react';
 
 export default function Home() {
-  const [todos, setTodos] = useState<{ text: string; completed: boolean }[]>(
-    []
-  );
+  const [todos, setTodos] = useState<
+    { text: string; completed: boolean; createdAt: string }[]
+  >([]);
   const [newTodo, setNewTodo] = useState('');
 
   const addTodo = (text: string) => {
     if (text.trim() === '') return;
-    setTodos([...todos, { text, completed: false }]);
+    const createdAt = new Date().toLocaleString();
+    setTodos([...todos, { text, completed: false, createdAt }]);
     setNewTodo('');
   };
 
@@ -62,15 +63,20 @@ export default function Home() {
                 onChange={() => toggleCompleted(index)}
                 className='accent-green-500 w-4 h-4 '
               />
-              <span
-                className={`text-black dark:text-white truncate ${
-                  todo.completed
-                    ? 'line-through text-gray-400 dark:text-gray-500'
-                    : ''
-                }`}
-              >
-                {todo.text}
-              </span>
+              <div className='flex flex-col overflow-hidden'>
+                <span
+                  className={`truncate ${
+                    todo.completed
+                      ? 'line-through text-gray-400 dark:text-gray-500'
+                      : 'text-black dark:text-white'
+                  }`}
+                >
+                  {todo.text}
+                </span>
+                <small className='text-xs text-gray-500 dark:text-gray-300'>
+                  {todo.createdAt}
+                </small>
+              </div>
             </div>
             <button
               onClick={() => removeTodo(index)}
